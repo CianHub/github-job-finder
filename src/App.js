@@ -13,7 +13,9 @@ function App() {
     <Container>
       {loading && <h1>Loading...</h1>}
       {error && <h1>Error try reloading...</h1>}
-      {jobs && jobs.length}
+      {jobs.map((job) => {
+        return <Job key={job.id} job={job} />;
+      })}
     </Container>
   );
 }
