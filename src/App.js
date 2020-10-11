@@ -4,9 +4,10 @@ import useFetchJobs from './hooks/useFetchJobs';
 import { Container } from 'react-bootstrap';
 import Job from './components/Job';
 import JobPagination from './components/JobPagination';
+import SearchForm from './components/SearchForm';
 
 function App() {
-  const [params, setParams] = useState();
+  const [params, setParams] = useState({ description: '' });
   const [page, setPage] = useState(1);
 
   const { jobs, loading, error, hasNextPage } = useFetchJobs(params, page);
@@ -22,6 +23,10 @@ function App() {
   return (
     <Container className="my-4">
       <h1 className="mb-4">GitHub Job Finder</h1>
+      <SearchForm
+        params={params}
+        onParamChange={handleParamChange}
+      ></SearchForm>
       <JobPagination
         page={page}
         setPage={setPage}
