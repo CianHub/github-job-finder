@@ -1,5 +1,6 @@
 import React from 'react';
 import { Badge, Card } from 'react-bootstrap';
+import ReactMarkdown from 'react-markdown';
 
 const Job = ({ job }) => {
   return (
@@ -20,6 +21,9 @@ const Job = ({ job }) => {
             <Badge className="mr-2" variant="secondary">
               {job.location}
             </Badge>
+            <div style={{ wordBreak: 'break-all' }}>
+              <ReactMarkdown source={job.how_to_apply}></ReactMarkdown>
+            </div>
           </div>
         </div>
       </Card.Body>
