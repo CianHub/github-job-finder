@@ -12,10 +12,9 @@ function reducer(state, action) {
     case ACTIONS.MAKE_REQUEST:
       return { loading: true, jobs: [] };
     case ACTIONS.GET_DATA:
-      return { ...state, loading: false, jobs: action.payload.jobs };
+      return { loading: false, jobs: action.payload.jobs };
     case ACTIONS.ERROR:
       return {
-        ...state,
         loading: false,
         error: action.payload.error,
         jobs: [],
@@ -36,14 +35,14 @@ export default function useFetchJobs(params, page) {
 
     axios
       .get(BASE_URL, {
-        cancelToken: cancelReqToken,
+        cancelToken: cancelReqToken.token,
         params: { markdown: true, page: page, ...params },
       })
       .then((res) => {
         dispatch({ type: ACTIONS.GET_DATA, payload: { jobs: res.data } });
       })
       .catch((err) => {
-        if (axions.isCancel(e)) return;
+        if (axios.isCancel(err)) return;
         dispatch({ type: ACTIONS.ERROR, payload: { error: err } });
       });
 
@@ -53,5 +52,7 @@ export default function useFetchJobs(params, page) {
   }, [params, page]);
 
   const [state, dispatch] = useReducer(reducer, { jobs: [], loading: true });
+
+  console.log(state.error);
   return { jobs: state.jobs, loading: state.loading, error: state.error };
 }
