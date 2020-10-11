@@ -31,7 +31,7 @@ const BASE_URL = 'https://jobs.github.com/positions.json';
 export default function useFetchJobs(params, page) {
   useEffect(() => {
     dispatch({ type: ACTIONS.MAKE_REQUEST });
-    axios.get(BASE_URL);
+    axios.get(BASE_URL, { params: { markdown: true, page: page, ...params } });
   }, [params, page]);
 
   const [state, dispatch] = useReducer(reducer, { jobs: [], loading: true });
