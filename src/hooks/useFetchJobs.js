@@ -31,10 +31,14 @@ const BASE_URL = CORS_URL + 'https://jobs.github.com/positions.json';
 
 export default function useFetchJobs(params, page) {
   useEffect(() => {
+    const cancelReqToken = axios.CancelToken.source();
     dispatch({ type: ACTIONS.MAKE_REQUEST });
 
     axios
-      .get(BASE_URL, { params: { markdown: true, page: page, ...params } })
+      .get(BASE_URL, {
+        cancelToken: cancelReqToken,
+        params: { markdown: true, page: page, ...params },
+      })
       .then((res) => {
         dispatch({ type: ACTIONS.GET_DATA, payload: { jobs: res.data } });
       })
