@@ -42,9 +42,14 @@ export default function useFetchJobs(params, page) {
       .then((res) => {
         dispatch({ type: ACTIONS.GET_DATA, payload: { jobs: res.data } });
       })
-      .catch((err) =>
-        dispatch({ type: ACTIONS.ERROR, payload: { error: err } })
-      );
+      .catch((err) => {
+        if (axions.isCancel(e)) return;
+        dispatch({ type: ACTIONS.ERROR, payload: { error: err } });
+      });
+
+    return () => {
+      cancelReqToken.cancel();
+    };
   }, [params, page]);
 
   const [state, dispatch] = useReducer(reducer, { jobs: [], loading: true });
