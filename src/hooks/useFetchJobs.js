@@ -26,8 +26,8 @@ function reducer(state, action) {
   }
 }
 
-const corsURL = 'https://';
-const BASE_URL = 'https://jobs.github.com/positions.json';
+const CORS_URL = 'https://cors-anywhere.herokuapp.com/';
+const BASE_URL = CORS_URL + 'https://jobs.github.com/positions.json';
 
 export default function useFetchJobs(params, page) {
   useEffect(() => {
