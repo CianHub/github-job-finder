@@ -5,6 +5,7 @@ const ACTIONS = {
   MAKE_REQUEST: 'make request',
   GET_DATA: 'get data',
   ERROR: 'error',
+  HAS_NEXT_PAGE: 'has next page',
 };
 
 function reducer(state, action) {
@@ -12,9 +13,12 @@ function reducer(state, action) {
     case ACTIONS.MAKE_REQUEST:
       return { loading: true, jobs: [] };
     case ACTIONS.GET_DATA:
-      return { loading: false, jobs: action.payload.jobs };
+      return { ...state, loading: false, jobs: action.payload.jobs };
+    case ACTIONS.HAS_NEXT_PAGE:
+      return { ...state, hasNextPage: action.payload.hasNextPage };
     case ACTIONS.ERROR:
       return {
+        ...state,
         loading: false,
         error: action.payload.error,
         jobs: [],
