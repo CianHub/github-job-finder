@@ -5,7 +5,7 @@ import ReactMarkdown from 'react-markdown';
 const Job = ({ job }) => {
   const [open, setOpen] = useState(false);
   return (
-    <Card>
+    <Card className="mb-3">
       <Card.Body>
         <div className="d-flex justify-content-between">
           <div className="">
@@ -36,7 +36,7 @@ const Job = ({ job }) => {
         </div>
         <Card.Text>
           <Button onClick={() => setOpen(!open)} variant="primary">
-            {open ? 'Hide Details': 'View Details'
+            {open ? 'Hide Details' : 'View Details'}
           </Button>
         </Card.Text>
         <Collapse in={open}>
