@@ -1,4 +1,5 @@
-import { useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
+import axios from 'axios';
 
 const ACTIONS = {
   MAKE_REQUEST: 'make request',
@@ -25,7 +26,14 @@ function reducer(state, action) {
   }
 }
 
+const BASE_URL = 'https://jobs.github.com/positions.json';
+
 export default function useFetchJobs(params, page) {
+  useEffect(() => {
+    dispatch({ type: ACTIONS.MAKE_REQUEST });
+    axios.get(BASE_URL);
+  }, [params, page]);
+
   const [state, dispatch] = useReducer(reducer, { jobs: [], loading: true });
   return { jobs: [], loading: false, error: false };
 }
