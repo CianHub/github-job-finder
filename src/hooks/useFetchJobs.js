@@ -50,6 +50,24 @@ export default function useFetchJobs(params, page) {
         dispatch({ type: ACTIONS.ERROR, payload: { error: err } });
       });
 
+    const cancelReqToken2 = axios.CancelToken.source();
+
+    axios
+      .get(BASE_URL, {
+        cancelToken: cancelReqToken2.token,
+        params: { markdown: true, page: page + 1, ...params },
+      })
+      .then((res) => {
+        dispatch({
+          type: ACTIONS.HAS_NEXT_PAGE,
+          payload: { hasNextPage: res.data.length !== 0 },
+        });
+      })
+      .catch((err) => {
+        if (axios.isCancel(err)) return;
+        dispatch({ type: ACTIONS.ERROR, payload: { error: err } });
+      });
+
     return () => {
       cancelReqToken.cancel();
     };
