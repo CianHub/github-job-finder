@@ -11,6 +11,14 @@ function App() {
 
   const { jobs, loading, error, hasNextPage } = useFetchJobs(params, page);
 
+  const handleParamChange = (e) => {
+    const param = e.target.name;
+    const value = e.target.value;
+    setPage(1);
+    setParams((prevParams) => {
+      return { ...prevParams, [param]: value };
+    });
+  };
   return (
     <Container className="my-4">
       <h1 className="mb-4">GitHub Job Finder</h1>
