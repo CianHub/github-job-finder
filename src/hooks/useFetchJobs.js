@@ -76,5 +76,10 @@ export default function useFetchJobs(params, page) {
   const [state, dispatch] = useReducer(reducer, { jobs: [], loading: true });
 
   console.log(state.error);
-  return { jobs: state.jobs, loading: state.loading, error: state.error };
+  return {
+    jobs: state.jobs,
+    loading: state.loading,
+    error: state.error,
+    hasNextPage: state.hasNextPage,
+  };
 }

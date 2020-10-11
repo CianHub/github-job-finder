@@ -9,12 +9,16 @@ function App() {
   const [params, setParams] = useState();
   const [page, setPage] = useState(1);
 
-  const { jobs, loading, error } = useFetchJobs(params, page);
+  const { jobs, loading, error, hasNextPage } = useFetchJobs(params, page);
 
   return (
     <Container className="my-4">
       <h1 className="mb-4">GitHub Job Finder</h1>
-      <JobPagination page={page} setPage={setPage}></JobPagination>
+      <JobPagination
+        page={page}
+        setPage={setPage}
+        hasNextPage={hasNextPage}
+      ></JobPagination>
       {loading && <h1>Loading...</h1>}
       {error && <h1>Error try reloading...</h1>}
       {jobs.map((job) => {
@@ -23,7 +27,7 @@ function App() {
       <JobPagination
         page={page}
         setPage={setPage}
-        hasNextPage={true}
+        hasNextPage={hasNextPage}
       ></JobPagination>
     </Container>
   );
