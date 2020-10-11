@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card } from 'react-bootstrap';
+import { Badge, Card } from 'react-bootstrap';
 
 const Job = ({ job }) => {
   return (
@@ -13,6 +13,13 @@ const Job = ({ job }) => {
                 {job.company}
               </span>
             </Card.Title>
+            <Card.Subtitle className="text-muted mb-2">
+              {job.created_at.toLocaleString()}
+            </Card.Subtitle>
+            <Badge variant="secondary">{job.type}</Badge>{' '}
+            <Badge className="mr-2" variant="secondary">
+              {job.location}
+            </Badge>
           </div>
         </div>
       </Card.Body>
