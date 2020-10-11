@@ -25,6 +25,13 @@ const Job = ({ job }) => {
               <ReactMarkdown source={job.how_to_apply}></ReactMarkdown>
             </div>
           </div>
+
+          <img
+            src={job.company_logo}
+            alt={job.company}
+            className="d-none d-md-block"
+            height="50"
+          />
         </div>
       </Card.Body>
     </Card>
