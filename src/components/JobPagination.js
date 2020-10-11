@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Pagination } from 'react-bootstrap';
 
-const JobPagination = ({ page, setPage }) => {
+const JobPagination = ({ page, setPage, hasNextPage }) => {
   return (
     <Pagination>
       {page !== 1 && <Pagination.Prev></Pagination.Prev>}
@@ -10,10 +10,10 @@ const JobPagination = ({ page, setPage }) => {
       {page > 2 && <Pagination.Ellipsis>1</Pagination.Ellipsis>}
       {page > 2 && <Pagination.Item>{page - 1}</Pagination.Item>}
 
-      <Pagination.Item>{page}</Pagination.Item>
-      <Pagination.Item>{page + 1}</Pagination.Item>
+      <Pagination.Item active>{page}</Pagination.Item>
+      {hasNextPage && <Pagination.Item>{page + 1}</Pagination.Item>}
 
-      <Pagination.Next></Pagination.Next>
+      {hasNextPage && <Pagination.Next></Pagination.Next>}
     </Pagination>
   );
 };
